@@ -25,7 +25,7 @@ module.exports = appInfo => {
 
   const sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'task-manage-erp-dev-web',
+    database: 'task-manage-erp-web',
     host: '127.0.0.1',
     t: '3306',
     username: 'root',

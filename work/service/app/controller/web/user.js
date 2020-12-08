@@ -1,14 +1,9 @@
-const Controller = require('egg').Controller;
+const Controller = require('../../core/baseController');
 
 class UserController extends Controller {
     /*登录页面*/
     async login() {
-        this.ctx.locals.lay.base = {
-            keywords:"Egg中文社区,nodejs, node, express,egg,koa2,ThinkJS, socket.io,关注Web前端开发技术",
-            description:"Egg中文社区,nodejs, node, express,egg,koa2,ThinkJS, socket.io",
-            title:"登录-Egg中文社区",
-        };
-        await this.ctx.render('/user/login.tpl');
+        this.success('登录成功');
     };
 
     /*注册页面*/

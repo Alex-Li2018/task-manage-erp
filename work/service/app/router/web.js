@@ -9,5 +9,5 @@ module.exports = app => {
   const { controller } = app;
   const { web } = controller;
 
-  apiV1Router.get('/user/login', web.user.login);
+  apiV1Router.post('/user/login', web.user.login);
 };

@@ -3,6 +3,11 @@ const Controller = require('../../core/baseController');
 class UserController extends Controller {
     /*登录页面*/
     async login() {
+        const ctx = this.ctx;
+        const { user_name, age, phone } = ctx.request.body;
+        console.log(user_name, age, phone);
+        console.log(ctx.model);
+        await ctx.model.WebUser.create({ user_name, age, phone });
         this.success('登录成功');
     };
 

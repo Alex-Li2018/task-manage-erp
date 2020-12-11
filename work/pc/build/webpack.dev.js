@@ -1,7 +1,8 @@
-const { smart } = require('webpack-merge')
-const base = require('./webpack.base.js')
+const { merge } = require('webpack-merge');
+const path = require('path');
+const base = require('./webpack.base.js');
 
-module.exports = smart(base,{
+module.exports = merge(base,{
     mode: 'development',
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -36,4 +37,4 @@ module.exports = smart(base,{
     // devtool: 'cheap-module-source-map',
     // 4) 不会产生文件,集成在打包后的文件中 不会产生列
     devtool: 'source-map'
-})
+});

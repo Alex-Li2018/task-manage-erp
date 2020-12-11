@@ -1,9 +1,9 @@
-const {smart} = require('webpack-merge')
-const base = require('./webpack.base.js')
-const webpack = require("webpack")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const { merge } = require('webpack-merge');
+const base = require('./webpack.base.js');
+const webpack = require("webpack");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = smart(base, {
+module.exports = merge(base, {
     mode: 'production',
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -61,4 +61,4 @@ module.exports = smart(base, {
             `
         )
     ]
-})
+});

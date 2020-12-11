@@ -1,9 +1,8 @@
 // 开发环境脚本
-
 const path = require('path');
-const fs = require('fs');
 const shell = require('shelljs');
-const { program } = require('commander');
+const inquirer = require('inquirer')
+const { spawn } = require('child_process');
 
 function echoMessage(content, type = 'success') {
     if (type === 'success') {
@@ -17,13 +16,11 @@ inquirer
     .prompt([
         {
             type: 'rawlist',
-            name: 'compilerCity',
-            message: '请选择编译城市?',
+            name: 'compilerProject',
+            message: '请选择编译的项目?',
             choices: [
-                '成都',
-                '杭州',
-                '南京',
-                '武汉'
+                'pc',
+                'service'
             ]
         },
         {
@@ -32,54 +29,31 @@ inquirer
             message: '请选择启动环境?',
             choices: [
                 'development',
-                'staging',
-                'production'
-            ]
-        },
-        {
-            type: 'rawlist',
-            name: 'compilerWatch',
-            message: '是否监听?',
-            choices: [
-                'yes',
-                'no'
+                'stage'
             ]
         }
     ])
     .then(answers => {
-        shell.echo('-e', '\n\033[32m 开始编译' + answers.compilerCity + '... \033[0m');
+        shell.echo('-e', '\n\033[32m 开始编译' + answers.compilerProject + '... \033[0m');
 
         // 切换城市
-        let city = 'chengdu';
+        const project = answers.compilerProject;
+        let command;
 
-        switch (answers.compilerCity) {
-        case '成都':
-            city = 'chengdu';
-            break;
-        case '杭州':
-            city = 'hangzhou';
-            break;
-        case '南京':
-            city = 'nanjing';
-            break;
-        case '武汉':
-            city = 'wuhan';
-            break;
-        default:
+        if (project === 'pc') {
+            command = `cross-env NODE_ENV=${answers.compilerEnv} webpack-dev-server --progress --config build/webpack.${answers.compilerEnv === 'development' ? 'dev' : 'prod'}.js`
+        } else {
+            command = 'egg-bin dev'
         }
 
-        shell.echo('-e', '\n\033[32m 更新env环境配置... \033[0m');
-        // 切换城市env
-        changeWeixinEnv(city);
-        shell.echo('-e', '\n\033[32m 更新env环境配置 [done] \033[0m');
 
-        const command = `cross-env NODE_ENV=${answers.compilerEnv === 'development' ? 'development' : 'production'} VUE_APP_ENV=${answers.compilerEnv} CITY_NAME=${city} UNI_INPUT_DIR=./src UNI_OUTPUT_DIR=../../dist/mp-weixin UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch`;
-
-        shell.echo('-e', '\n\033[32m ' + answers.compilerCity + ' : 编译中... \033[0m');
+        shell.echo('-e', '\n\033[32m ' + answers.compilerProject + '项目' + answers.compilerEnv + '环境' + ': 编译中... \033[0m');
 
         // 开始编译
+        const cwd = answers.compilerProject === 'pc' ? 
+            path.resolve(__dirname, '../work/pc') : path.resolve(__dirname, '../work/service'); 
         const app = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', command.split(' '), {
-            cwd: path.resolve(__dirname, '../app/weixin')
+            cwd
         });
 
         app.stdout.on('data', data => {

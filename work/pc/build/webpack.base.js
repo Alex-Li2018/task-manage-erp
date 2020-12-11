@@ -1,10 +1,11 @@
-const path = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    VueLoaderPlugin = require('vue-loader').VueLoaderPlugin;
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const CleanWebpackPlugin = require("clean-webpack-plugin");
+const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin;
 
 module.exports =  {
     entry: {
-        main: '../src/main.ts',
+        app: './src/main.ts'
     },
     resolve: {
         alias: {
@@ -19,15 +20,16 @@ module.exports =  {
     module: {
         rules: [
             {
-                test: /\.vue$/,
-                use: 'vue-loader'
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                },
             },
             {
-                test: /\.tsx$/,
-                use: [
-                    'vue-loader', 'vue-tsx-loader?template=jade'
-                ]
-                
+                test: /\.vue$/,
+                use: 'vue-loader'
             },
             {
                 test: /\.ts$/,
@@ -59,10 +61,13 @@ module.exports =  {
         open: true
     },
     plugins: [
+        // new CleanWebpackPlugin([
+        //     "./dist"
+        // ]),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
-            template: './src/index.html',
+            template: './client/index.html',
             filename: './index.html',
         })
     ]

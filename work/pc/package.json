@@ -4,17 +4,28 @@
   "description": "task manage pc端",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --config build/webpack.prod.js",
+    "lintfix": "eslint --fix --ext .js, .ts, .vue src/"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "typescript": "^4.1.2",
-    "vue-next": "0.0.1",
-    "webpack": "^5.10.0"
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0",
+    "ant-design-vue": "^2.0.0-beta.10"
   },
   "devDependencies": {
-    "vue-loader": "^15.9.5"
+    "@vue/compiler-sfc": "^3.0.4",
+    "node-sass": "^5.0.0",
+    "sass": "^1.30.0",
+    "sass-loader": "^10.1.0",
+    "vue-loader": "^15.9.5",
+    "typescript": "^4.1.2",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-merge": "^5.5.0"
   }
 }

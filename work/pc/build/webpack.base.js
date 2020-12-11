@@ -6,11 +6,11 @@ module.exports =  {
     entry: {
         main: '../src/main.ts',
     },
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: prod ? `[name].[hash:8].js` : `[name].js`,
-    },
     resolve: {
+        alias: {
+            '@': path.resolve(__dirname, '../src'),
+            '@api': path.resolve(__dirname, '../src/api')
+        },
         extensions: ['.vue', '.ts', '.tsx', '.js'],
     },
     resolveLoader: {
@@ -44,6 +44,10 @@ module.exports =  {
             {
                 test: /\.less$/,
                 use: ['style-loader', 'css-loader', 'less-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
@@ -52,7 +56,7 @@ module.exports =  {
         historyApiFallback: true,
         compress: true,
         port: 3000,
-        open:true
+        open: true
     },
     plugins: [
         new VueLoaderPlugin(),

@@ -23,7 +23,7 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
-  const sequelize = {
+  config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'task-manage-erp-web',
     host: '127.0.0.1',

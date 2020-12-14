@@ -29,19 +29,18 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
-  const sequelize = {
+  config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'task-manage-erp-dev-web',
     host: '127.0.0.1',
-    t: '3306',
+    port: 3306,
     username: 'root',
-    password: '',
+    password: '5520830',
     timezone: '+08:00' // 东八时区
   };
 
   return {
     ...config,
     ...userConfig,
-    ...sequelize,
   };
 };

@@ -9,5 +9,6 @@ module.exports = app => {
   const { controller } = app;
   const { web } = controller;
 
+  // 用户登录
   apiV1Router.post('/user/login', web.user.login);
 };

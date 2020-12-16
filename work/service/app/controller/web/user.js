@@ -6,7 +6,6 @@ class UserController extends Controller {
         const ctx = this.ctx;
         const { user_name, age, phone } = ctx.request.body;
         console.log(user_name, age, phone);
-        console.log(ctx.model);
         await ctx.model.WebUser.create({ user_name, age, phone });
         this.success('登录成功');
     };

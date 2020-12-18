@@ -29,6 +29,24 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.jwt = {
+    secret: 'aVwCkQeOrT',
+  };
+  // 安全配置 （https://eggjs.org/zh-cn/core/security.html）
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true,
+    },
+    // 允许访问接口的白名单
+    domainWhiteList: [ 'http://localhost:8080' ],
+  };
+  // 跨域配置
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+  // sequelize数据库
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'task-manage-erp-dev-web',
@@ -36,7 +54,7 @@ module.exports = appInfo => {
     port: 3306,
     username: 'root',
     password: '5520830',
-    timezone: '+08:00' // 东八时区
+    timezone: '+08:00', // 东八时区
   };
 
   return {

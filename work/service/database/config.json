@@ -9,13 +9,13 @@
   "test": {
     "username": "root",
     "password": "5520830",
-    "database": "database_test",
+    "database": "task-manage-erp-dev-web",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "5520830",
+    "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"

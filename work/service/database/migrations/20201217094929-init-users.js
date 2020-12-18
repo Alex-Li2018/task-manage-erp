@@ -15,7 +15,12 @@ module.exports = {
         allowNull: false,
       },
       phone: {
-        type: BIGINT(11),
+        type: BIGINT(30),
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: STRING(12),
         allowNull: false,
       },
       age: INTEGER,

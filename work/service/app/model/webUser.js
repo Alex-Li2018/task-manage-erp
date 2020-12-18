@@ -17,6 +17,10 @@ module.exports = app => {
       type: BIGINT(11),
       allowNull: false,
     },
+    password: {
+      type: STRING(30),
+      allowNull: false,
+    },
     age: INTEGER,
     avatar: STRING(90),
     created_at: DATE,

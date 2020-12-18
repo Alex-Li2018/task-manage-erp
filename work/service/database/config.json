@@ -8,8 +8,8 @@
   },
   "test": {
     "username": "root",
-    "password": "5520830",
-    "database": "task-manage-erp-dev-web",
+    "password": null,
+    "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

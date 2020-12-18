@@ -4,7 +4,7 @@ module.exports = app => {
   const { STRING, INTEGER, DATE, BIGINT } = app.Sequelize;
 
   const WebUser = app.model.define('users', {
-    id: {
+    uid: {
       type: INTEGER,
       primaryKey: true,
       autoIncrement: true,

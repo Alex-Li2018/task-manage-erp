@@ -15,6 +15,8 @@
     + Sass
     + vetur
     + Beautify
++ Git
++ NodeJS
 
 ---
 
@@ -64,6 +66,7 @@
 
 + airbnb 规范
 + vue 官方规范
++ eslint-config-egg 规范
 
 ---
 

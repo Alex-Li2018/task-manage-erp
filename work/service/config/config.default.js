@@ -22,7 +22,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1606231535920_3042';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'jwtMiddleWare' ];
 
   // add your user config here
   const userConfig = {

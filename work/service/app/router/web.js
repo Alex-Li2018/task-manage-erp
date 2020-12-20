@@ -9,6 +9,10 @@ module.exports = app => {
   const { controller } = app;
   const { web } = controller;
 
+  // 登录
+  apiV1Router.post('/login', web.login.login);
+  // 登出
+  apiV1Router.get('/logout', web.login.logout);
   // 用户注册
   apiV1Router.post('/user/register', web.user.register);
   // 用户列表

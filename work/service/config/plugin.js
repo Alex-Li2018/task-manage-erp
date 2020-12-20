@@ -20,3 +20,8 @@ exports.cors = {
   enable: true,
   package: 'egg-cors',
 };
+
+exports.valparams = {
+  enable: true,
+  package: 'egg-valparams',
+};

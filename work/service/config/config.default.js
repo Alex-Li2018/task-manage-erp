@@ -24,6 +24,12 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [ 'jwtMiddleWare' ];
 
+  config.jwtMiddleWare = {
+    exclude: [
+      'login',
+    ],
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -55,6 +61,10 @@ module.exports = appInfo => {
     username: 'root',
     password: '5520830',
     timezone: '+08:00', // 东八时区
+  };
+  config.valparams = {
+    locale: 'zh-cn',
+    throwError: false,
   };
 
   return {

@@ -1,38 +1,46 @@
 'use strict';
 const Controller = require('../../core/baseController');
 
-class UserController extends Controller {
-  /* 注册接口*/
-  async register() {
+class LoginController extends Controller {
+  /* 登录接口*/
+  async login() {
     const { ctx, app } = this;
-    const { user_name: userName, phone, password } = ctx.request.body;
+    const { phone, password } = ctx.request.body;
+    // 参数验证
+    ctx.validate({
+      phone: { type: 'string', required: true, desc: '用户名' },
+      password: { type: 'string', required: true, desc: '密码' },
+    });
+    if (ctx.paramErrors) {
+      return this.error(ctx.paramErrors, '参数校验不通过');
+    }
     try {
-      const { dataValues } = await ctx.model.WebUser.create({ user_name: userName, phone, password });
+      const user = await ctx.model.WebUser.findOne({ where: { phone } });
+      
+      if (!user || user.password !== password) {
+        this.error({}, '手机号或密码错误!');
+        return;
+      }
 
       // 验证token，请求时在header配置 Authorization=`Bearer ${token}`
       const token = app.jwt.sign({
-        user_name: dataValues.user_name,
-        uid: dataValues.uid,
+        user_name: user.user_name,
+        uid: user.uid,
       }, app.config.jwt.secret, {
         expiresIn: '1 days',
       });
 
       this.success({
-        user_name: userName,
-        phone,
+        ...user,
         token,
       }, '注册成功');
     } catch (err) {
-      if (err.original.code === 'ER_DUP_ENTRY') {
-        this.error({}, '手机号重复');
-      } else {
-        this.error(err, '注册失败');
-      }
+      this.error(err, '登录失败');
     }
   }
 
-  /* 用户列表接口 */
-  async lists() {
+  /* 登出接口 */
+  async logout() {
     const { ctx, app } = this;
     const { Op } = app.Sequelize;
     const { page, page_size, name } = ctx.query;
@@ -66,4 +74,4 @@ class UserController extends Controller {
   }
 }
 
-module.exports = UserController;
+module.exports = LoginController;

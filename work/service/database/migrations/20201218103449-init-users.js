@@ -20,7 +20,7 @@ module.exports = {
         unique: true,
       },
       password: {
-        type: STRING(12),
+        type: STRING(60),
         allowNull: false,
       },
       age: INTEGER,

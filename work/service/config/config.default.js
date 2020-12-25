@@ -27,6 +27,7 @@ module.exports = appInfo => {
   config.jwtMiddleWare = {
     exclude: [
       'login',
+      'user/register',
     ],
   };
 

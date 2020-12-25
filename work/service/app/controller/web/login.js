@@ -15,8 +15,8 @@ class LoginController extends Controller {
       return this.error(ctx.paramErrors, '参数校验不通过');
     }
     try {
-      const user = await ctx.model.WebUser.findOne({ where: { phone } });
-      
+      const { dataValues: user } = await ctx.model.WebUser.findOne({ where: { phone } });
+
       if (!user || user.password !== password) {
         this.error({}, '手机号或密码错误!');
         return;

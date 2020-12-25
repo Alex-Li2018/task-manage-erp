@@ -6,16 +6,17 @@ module.exports = options => {
     // 先判断是否需要鉴权
     const { exclude } = options;
     const requestUrl = ctx.request.url.replace('/web/v1/', '');
-    if (!exclude.includes(requestUrl)) {
 
-      const token = ctx.request.header.authorization;
+    if (!exclude.includes(requestUrl)) {
+      let token = ctx.request.header.authorization;
       let decode;
       if (token) {
         try {
           // 解码token
+          token = token.replace('Bearer ', '');
           decode = ctx.app.jwt.verify(token, ctx.app.config.jwt.secret);
-          await next();
           console.log(decode);
+          await next();
         } catch (error) {
           ctx.body = {
             code: 200,

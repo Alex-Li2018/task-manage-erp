@@ -30,12 +30,11 @@ module.exports = appInfo => {
     t: '3306',
     username: 'root',
     password: '',
-    timezone: '+08:00' // 东八时区
+    timezone: '+08:00', // 东八时区
   };
 
   return {
     ...config,
     ...userConfig,
-    ...sequelize,
   };
 };

@@ -16,5 +16,8 @@ module.exports = app => {
   // 用户注册
   apiV1Router.post('/user/register', web.user.register);
   // 用户列表
-  apiV1Router.get('/user/lists', web.user.lists);
+  apiV1Router.get('/user', web.user.lists);
+  // 任务
+  apiV1Router.get('/tasks', web.task.lists);
+  apiV1Router.post('/tasks', web.task.create);
 };

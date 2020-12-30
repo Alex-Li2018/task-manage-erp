@@ -20,4 +20,5 @@ module.exports = app => {
   // 任务
   apiV1Router.get('/tasks', web.task.lists);
   apiV1Router.post('/tasks', web.task.create);
+  apiV1Router.put('/tasks/:id', web.task.update);
 };

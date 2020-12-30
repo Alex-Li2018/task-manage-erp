@@ -12,7 +12,7 @@ class TaskController extends Controller {
       left_copies, detail,
       start_at, end_at,
     } = ctx.request.body;
-    console.log(ctx.request.body);
+
     try {
       const { dataValues: tasks } = await ctx.model.WebTask.create({
         name, platform, order_prize,
@@ -59,6 +59,36 @@ class TaskController extends Controller {
       this.success(data, '查询成功');
     } catch (err) {
       this.error(err, '查询失败');
+    }
+  }
+
+  async update() {
+    const { ctx } = this;
+    const {
+      name, platform, order_prize,
+      rebate_prize, actual_prize,
+      total_copies, apply_copies,
+      left_copies, detail,
+      start_at, end_at,
+    } = ctx.request.body;
+    const id = ctx.params.id;
+
+    try {
+      const data = await ctx.model.WebTask.findByPk(Number(id));
+
+      const { dataValues: task } = await data.update({
+        name, platform, order_prize,
+        rebate_prize, actual_prize,
+        total_copies, apply_copies,
+        left_copies, detail,
+        start_at, end_at,
+      });
+
+      this.success({
+        ...task,
+      }, '更新成功');
+    } catch (err) {
+      this.error(err, '更新失败');
     }
   }
 }

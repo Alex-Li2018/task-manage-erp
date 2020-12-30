@@ -29,6 +29,7 @@ class TaskController extends Controller {
     }
   }
 
+  /** 列表 */
   async lists() {
     const { ctx, app } = this;
     const { Op } = app.Sequelize;
@@ -62,6 +63,23 @@ class TaskController extends Controller {
     }
   }
 
+  /** 详情 */
+  async detail() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+
+    try {
+      const { dataValues: task } = await ctx.model.WebTask.findByPk(Number(id));
+
+      this.success({
+        ...task,
+      }, '查询详情成功');
+    } catch (err) {
+      this.error(err, '查询详情失败');
+    }
+  }
+
+  /** 更新 */
   async update() {
     const { ctx } = this;
     const {
@@ -89,6 +107,20 @@ class TaskController extends Controller {
       }, '更新成功');
     } catch (err) {
       this.error(err, '更新失败');
+    }
+  }
+
+  /** 删除 */
+  async delete() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+
+    try {
+      const data = await ctx.model.WebTask.findByPk(Number(id));
+      await data.destroy();
+      this.success({}, '删除成功');
+    } catch (err) {
+      this.error(err, '删除失败');
     }
   }
 }

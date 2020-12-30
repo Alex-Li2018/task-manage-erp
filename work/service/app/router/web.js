@@ -19,6 +19,8 @@ module.exports = app => {
   apiV1Router.get('/user', web.user.lists);
   // 任务
   apiV1Router.get('/tasks', web.task.lists);
+  apiV1Router.get('/tasks/:id', web.task.detail);
   apiV1Router.post('/tasks', web.task.create);
   apiV1Router.put('/tasks/:id', web.task.update);
+  apiV1Router.delete('/tasks/:id', web.task.delete);
 };

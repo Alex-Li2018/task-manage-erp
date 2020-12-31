@@ -3,7 +3,7 @@
 module.exports = app => {
   const { INTEGER, DATE, STRING } = app.Sequelize;
 
-  const WebTaskImg = app.model.define('tasks-img', {
+  const WebMaterials = app.model.define('materials', {
     id: {
       type: INTEGER,
       primaryKey: true,
@@ -21,7 +21,10 @@ module.exports = app => {
     },
     created_at: DATE,
     updated_at: DATE,
+  }, {
+    // 强制表名称等于模型名称
+    freezeTableName: true,
   });
 
-  return WebTaskImg;
+  return WebMaterials;
 };

@@ -23,4 +23,6 @@ module.exports = app => {
   apiV1Router.post('/tasks', web.task.create);
   apiV1Router.put('/tasks/:id', web.task.update);
   apiV1Router.delete('/tasks/:id', web.task.delete);
+  // 任务图片
+  apiV1Router.post('/materials', web.materials.create);
 };

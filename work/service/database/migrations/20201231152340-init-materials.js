@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const { INTEGER, DATE, STRING } = Sequelize;
-    await queryInterface.createTable('tasks-img', {
+    await queryInterface.createTable('materials', {
       id: {
         type: INTEGER,
         primaryKey: true,
@@ -15,8 +15,13 @@ module.exports = {
         allowNull: false,
       },
       // 图片链接
-      img_url: {
-        type: STRING(50),
+      url: {
+        type: STRING(255),
+        allowNull: false,
+      },
+      // 是音频 视频 图片等
+      type: {
+        type: INTEGER,
         allowNull: false,
       },
       created_at: DATE,
@@ -25,6 +30,6 @@ module.exports = {
   },
 
   down: async queryInterface => {
-    await queryInterface.dropTable('tasks-img');
+    await queryInterface.dropTable('materials');
   },
 };

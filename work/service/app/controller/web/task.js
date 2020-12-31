@@ -2,7 +2,7 @@
 const Controller = require('../../core/baseController');
 
 class TaskController extends Controller {
-  /* 注册接口*/
+  /* 创建接口*/
   async create() {
     const { ctx } = this;
     const {

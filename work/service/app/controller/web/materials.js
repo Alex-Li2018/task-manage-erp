@@ -2,6 +2,7 @@
 const Controller = require('../../core/baseController');
 
 class MaterialsController extends Controller {
+  /** 创建任务图片 */
   async create() {
     const { ctx } = this;
     const {
@@ -20,6 +21,20 @@ class MaterialsController extends Controller {
     } catch (err) {
       console.log(err);
       this.error(err, '新增任务图片失败');
+    }
+  }
+
+  /** 任务删除图片 */
+  async delete() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+
+    try {
+      const data = await ctx.model.WebMaterials.findByPk(Number(id));
+      await data.destroy();
+      this.success({}, '删除成功');
+    } catch (err) {
+      this.error(err, '删除失败');
     }
   }
 }

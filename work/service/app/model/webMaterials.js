@@ -15,8 +15,13 @@ module.exports = app => {
       allowNull: false,
     },
     // 图片链接
-    img_url: {
-      type: STRING(50),
+    url: {
+      type: STRING(255),
+      allowNull: false,
+    },
+    // 是音频 视频 图片等
+    type: {
+      type: INTEGER,
       allowNull: false,
     },
     created_at: DATE,

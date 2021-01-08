@@ -4,6 +4,7 @@
   "scripts": {
     "init": "node ./build/init.js",
     "start": "node --max-old-space-size=10240 ./build/start.js",
+    "update-database": "node ./build/updateDataBase.js",
     "bootstrap": "npx lerna bootstrap",
     "commit-hooks": "node ./build/commit-hooks.js",
     "build": "node --max-old-space-size=10240 ./build/build.js",

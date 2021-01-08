@@ -1,9 +1,21 @@
-.idea/
-# vscode配置
-.vscode/
-# node_modules文件
-node_modules/
-# npm锁定版本文件
-*.local
-yarn.lock
+node_modules
+.DS_Store
+dist
+.npmrc
+.cache
 package-lock.json
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+# .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,41 +1,25 @@
-// tslint:disable
-// import { RouteConfig, createRouter, createWebHistory } from 'vue-router'
-import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/Home/index.vue';
+import { 
+  createRouter, 
+  createWebHashHistory, 
+  RouteRecordRaw 
+} from 'vue-router'
+import Home from '../views/Home.vue'
 
-const routes: Array<any> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
-    name: 'Index', // name不能为Home，否则路由不起作用
+    name: 'Home',
     component: Home
   },
-//   {
-//     path: '/list/:type',
-//     name: 'List',
-//     component: () => import('@/views/List.vue')
-//   },
-//   {
-//     path: '/detail/:id',
-//     name: 'Home',
-//     component: () => import('@/views/Detail.vue')
-//   },
-//   {
-//     path: '/about',
-//     name: 'About',
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () =>
-//       import(/* webpackChunkName: "about" */ '../views/About.vue')
-//   }
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
 

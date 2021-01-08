@@ -1,13 +1,19 @@
+'use strict';
 const { merge } = require('webpack-merge');
-const path = require('path');
-const base = require('./webpack.base.js');
+const commonConfig = require('./webpack.base.config');
 
-module.exports = merge(base,{
+module.exports = merge(
+  commonConfig,
+  {
     mode: 'development',
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: `[name].js`,
-    },
+    // 1) 映射源码,会单独生成一个sourcemap文件 出错了会标识当前报错的行列 大 全
+    // devtool: 'source-map',
+    // 2) 不会产生单独的文件但是可以显示行和列
+    // devtool: 'eval-source-map',
+    // 3) 不会产生列,但是是一个单独的映射文件
+    // devtool: 'cheap-module-source-map',
+    // 4) 不会产生文件,集成在打包后的文件中 不会产生列
+    devtool: 'eval-source-map', // 首次构建比较慢，二次构建比较快，源码映射source
     //实时打包
     watch: true,
     watchOptions: { //监控属性
@@ -28,13 +34,6 @@ module.exports = merge(base,{
                 pathRewrite: {'^/api': ''} //重写接口 就是我们请求的实际接口
             }
         }
-    },
-    // 1) 映射源码,会单独生成一个sourcemap文件 出错了会标识当前报错的行列 大 全
-    // devtool: 'source-map',
-    // 2) 不会产生单独的文件但是可以显示行和列
-    // devtool: 'eval-source-map',
-    // 3) 不会产生列,但是是一个单独的映射文件
-    // devtool: 'cheap-module-source-map',
-    // 4) 不会产生文件,集成在打包后的文件中 不会产生列
-    devtool: 'source-map'
-});
+    }
+  }
+)

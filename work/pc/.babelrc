@@ -1,6 +1,13 @@
 {
 	"plugins": [
 		[
+			"component", 
+			{
+				"libraryName": "element-plus",
+				"styleLibraryName": "theme-chalk"
+			}
+		],
+		[
 			"@babel/plugin-transform-runtime",
 			{
 				"corejs": 3

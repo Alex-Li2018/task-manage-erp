@@ -17,3 +17,9 @@ exports.scss = [
   'css-loader',
   'sass-loader'
 ];
+
+exports.less = [
+  isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+  'css-loader',
+  'less-loader'
+];

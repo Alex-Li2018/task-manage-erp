@@ -1,12 +1,12 @@
 import { createApp } from 'vue';
-import App from './App.vue';
 import router from '@/router';
 import store from '@/store';
-import { 
+import {
   ElMenu,
   ElMenuItem,
-  ElMenuItemGroup, 
+  ElMenuItemGroup,
 } from 'element-plus';
+import App from './App.vue';
 
 const app = createApp(App);
 

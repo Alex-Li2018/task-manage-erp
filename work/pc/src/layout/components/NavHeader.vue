@@ -1,13 +1,11 @@
 <template>
-    <section class="nav_wrap">
-
-    </section>
+    <section class="nav_wrap" />
 </template>
 
 <script lang="ts">
-export default {
+    export default {
 
-}
+    };
 </script>
 
 <style lang="scss" scoped>

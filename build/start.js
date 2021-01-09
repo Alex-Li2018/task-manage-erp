@@ -1,7 +1,7 @@
 // 开发环境脚本
 const path = require('path');
 const shell = require('shelljs');
-const inquirer = require('inquirer')
+const inquirer = require('inquirer');
 const { spawn } = require('child_process');
 
 function echoMessage(content, type = 'success') {
@@ -41,9 +41,9 @@ inquirer
         let command;
 
         if (project === 'pc') {
-            command = `cross-env NODE_ENV=${answers.compilerEnv} webpack-dev-server --progress --config build/webpack.${answers.compilerEnv === 'development' ? 'dev' : 'prod'}.js`
+            command = `cross-env NODE_ENV=${answers.compilerEnv} webpack-dev-server --progress --config build/webpack.${answers.compilerEnv === 'development' ? 'dev' : 'prod'}.js`;
         } else {
-            command = 'egg-bin dev'
+            command = 'egg-bin dev';
         }
 
 
@@ -68,5 +68,5 @@ inquirer
             shell.echo('-e', '\n\033[31m 编译失败 orz... \033[0m');
             console.error(`code: ${code}`);
             process.exit(0);
-        })
+        });
     });

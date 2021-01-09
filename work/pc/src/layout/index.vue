@@ -22,15 +22,13 @@
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue';
-import NavHeader from './components/NavHeader.vue';
+    import Sidebar from './components/Sidebar.vue';
 
-export default {
-    components: {
-        Sidebar,
-        NavHeader
-    }
-}
+    export default {
+        components: {
+            Sidebar,
+        },
+    };
 </script>
 
 <style lang="scss" scoped>

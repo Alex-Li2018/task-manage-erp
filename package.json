@@ -9,8 +9,7 @@
     "commit-hooks": "node ./build/commit-hooks.js",
     "build": "node --max-old-space-size=10240 ./build/build.js",
     "up-weixin": "node ./build/up-weixin.js",
-    "lintfix:pc": "eslint --fix --ext .js,.vue ./work/pc/src/*",
-    "lintfix:service": "eslint --fix --ext .js,.vue ./work/service/app/*",
+    "lintfix": "node ./build/lintfix.js",
     "commit": "git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },

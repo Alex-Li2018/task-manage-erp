@@ -6,7 +6,7 @@ import {
 
 import Layout from '@/layout/index.vue';
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
@@ -18,22 +18,23 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     redirect: '/home/index/',
     meta: {
-        title: '首页',
+        title: '任务管理',
     },
     children: [{
         path: 'index',
         name: 'taskManage',
         component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue'),
         meta: {
-          title: '任务配置'
+          title: '任务管理',
+          group: 'main'
         }
     }]
   }
-]
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
-})
+});
 
-export default router
+export default router;

@@ -1,12 +1,11 @@
 <template>
     <section class="layout_wrap">
         <div class="sidebar-container">
-            <Sidebar />
+            <Sidebar :menu="routesArr" />
         </div>
         <div class="main-container">
-            <!-- <div class="fixed-header">
-                <NavHeader />
-            </div> -->
+            <!-- 顶部导航 -->
+            <!-- <NavHeader /> -->
             <section class="app-main">
                 <transition
                     name="fade-transform"
@@ -22,13 +21,29 @@
 </template>
 
 <script>
+    import {
+        defineComponent,
+        reactive,
+        onMounted,
+    } from 'vue';
+    import { routes } from '@/router';
     import Sidebar from './components/Sidebar.vue';
 
-    export default {
+    export default defineComponent({
         components: {
             Sidebar,
         },
-    };
+        setup() {
+            let routesArr: Array<T> = reactive([]);
+            onMounted(() => {
+                routesArr = routes;
+            });
+
+            return {
+                routesArr,
+            };
+        },
+    });
 </script>
 
 <style lang="scss" scoped>
@@ -43,6 +58,12 @@
         width: calc(100vw - 200px);
         min-height: 100vh;
         margin-left: 200px;
+    }
+    .app-main {
+        padding: 25px;
+        width: 100%;
+        min-height: 100vh;
+        box-sizing: border-box;
     }
 }
 

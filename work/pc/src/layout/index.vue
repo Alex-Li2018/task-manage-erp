@@ -1,7 +1,7 @@
 <template>
     <section class="layout_wrap">
         <div class="sidebar-container">
-            <Sidebar :menu="routesArr" />
+            <Sidebar :menus="routesArr" />
         </div>
         <div class="main-container">
             <!-- 顶部导航 -->
@@ -20,10 +20,11 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
     import {
         defineComponent,
         reactive,
+        ref,
         onMounted,
     } from 'vue';
     import { routes } from '@/router';
@@ -34,10 +35,8 @@
             Sidebar,
         },
         setup() {
-            let routesArr: Array<T> = reactive([]);
-            onMounted(() => {
-                routesArr = routes;
-            });
+            const routesTmp = routes.filter(item => item.children);
+            const routesArr = reactive(routesTmp);
 
             return {
                 routesArr,

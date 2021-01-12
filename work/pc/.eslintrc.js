@@ -41,6 +41,7 @@ module.exports = {
   // 允许的全局变量
   globals: {
     window: true,
+    process: true,
     require: true,
     __NODE_ENV__: true,
     arguments: true,

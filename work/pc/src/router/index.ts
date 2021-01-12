@@ -23,7 +23,7 @@ export const routes: Array<RouteRecordRaw> = [
     children: [{
         path: 'index',
         name: 'taskManage',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue'),
+        component: () => import(/* webpackChunkName: "TaskManage" */ '../views/Home.vue'),
         meta: {
           title: '任务管理',
           group: 'main'

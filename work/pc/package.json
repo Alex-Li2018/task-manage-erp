@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "@babel/runtime-corejs3": "^7.12.1",
+    "axios": "^0.21.1",
     "element-plus": "^1.0.1-beta.23",
     "js-cookie": "^2.2.1",
     "vue": "^3.0.0",

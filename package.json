@@ -10,6 +10,7 @@
     "build": "node --max-old-space-size=10240 ./build/build.js",
     "up-weixin": "node ./build/up-weixin.js",
     "lintfix": "node ./build/lintfix.js",
+    "lintAll": "eslint --fix --ext .js,.ts,.vue work/",
     "commit": "git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
@@ -19,7 +20,7 @@
     "commander": "^6.2.0",
     "commitizen": "^4.1.2",
     "cross-env": "^6.0.3",
-    "eslint": "^6.8.0",
+    "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-loader": "^4.0.2",

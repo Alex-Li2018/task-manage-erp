@@ -1,23 +1,23 @@
 <template>
-    <section class="layout_wrap">
-        <div class="sidebar-container">
-            <Sidebar :menus="routesArr" />
-        </div>
-        <div class="main-container">
-            <!-- 顶部导航 -->
-            <!-- <NavHeader /> -->
-            <section class="app-main">
-                <transition
-                    name="fade-transform"
-                    mode="out-in"
-                >
-                    <keep-alive>
-                        <router-view />
-                    </keep-alive>
-                </transition>
-            </section>
-        </div>
-    </section>
+  <section class="layout_wrap">
+    <div class="sidebar-container">
+      <Sidebar :menus="routesArr" />
+    </div>
+    <div class="main-container">
+      <!-- 顶部导航 -->
+      <!-- <NavHeader /> -->
+      <section class="app-main">
+        <transition
+          name="fade-transform"
+          mode="out-in"
+        >
+          <keep-alive>
+            <router-view />
+          </keep-alive>
+        </transition>
+      </section>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

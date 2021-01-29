@@ -1,5 +1,5 @@
 <template>
-    <section class="nav_wrap" />
+  <section class="nav_wrap" />
 </template>
 
 <script lang="ts">

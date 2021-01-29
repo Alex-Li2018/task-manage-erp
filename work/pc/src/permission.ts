@@ -1,10 +1,10 @@
+import { getPageTitle } from '@/utils/lib/util';
 import router, { constantRoutes } from './router';
 import store from './store';
 import { getToken, setToken } from './utils/auth';
-import { getPageTitle } from '@/utils/lib/util';
 
-router.beforeEach(async(to, from, next) => { 
-    
+router.beforeEach(async(to, from, next) => {
+
     document.title = getPageTitle(to.meta.title);
 
     // 拦截url中的token,存到store

@@ -2,10 +2,10 @@ import { createApp } from 'vue';
 import router from '@/router';
 import store from '@/store';
 import {
-  ElMenu,
-  ElMenuItem,
-  ElMenuItemGroup,
-  ElAvatar,
+    ElMenu,
+    ElMenuItem,
+    ElMenuItemGroup,
+    ElAvatar,
 } from 'element-plus';
 import App from './App.vue';
 
@@ -17,6 +17,6 @@ app.use(ElMenuItemGroup);
 app.use(ElAvatar);
 
 app
-  .use(router)
-  .use(store)
-  .mount('#app');
+    .use(router)
+    .use(store)
+    .mount('#app');

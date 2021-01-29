@@ -1,34 +1,37 @@
 <template>
-    <section class="sidebar_wrap">
-        <div class="block">
-            <el-avatar 
-                :size="50" 
-                :src="avatarUrl">
-            </el-avatar>
-        </div>
-        <div class="menu-container">
-            <el-menu
-                :uniqueOpened="true"
-                default-active="2"
-                class="el-menu-vertical-demo"
-                background-color="#f7f7f7"
-                text-color="#304156"
-                active-text-color="#1b9aee"
-            >
-                <el-menu-item 
-                    v-for="(item, index) in menus"
-                    :key="index">
-                    <i 
-                        :class="{
-                            'el-icon-setting': item.meta.title === '用户中心',
-                            'el-icon-menu': item.meta.title !== '用户中心'
-                        }"
-                    />
-                    <template #title>{{ item.meta.title }}</template>
-                </el-menu-item>
-            </el-menu>
-        </div>
-    </section>
+  <section class="sidebar_wrap">
+    <div class="block">
+      <el-avatar
+        :size="50"
+        :src="avatarUrl"
+      />
+    </div>
+    <div class="menu-container">
+      <el-menu
+        :unique-opened="true"
+        default-active="2"
+        class="el-menu-vertical-demo"
+        background-color="#f7f7f7"
+        text-color="#304156"
+        active-text-color="#1b9aee"
+      >
+        <el-menu-item
+          v-for="(item, index) in menus"
+          :key="index"
+        >
+          <i
+            :class="{
+              'el-icon-setting': item.meta.title === '用户中心',
+              'el-icon-menu': item.meta.title !== '用户中心'
+            }"
+          />
+          <template #title>
+            {{ item.meta.title }}
+          </template>
+        </el-menu-item>
+      </el-menu>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

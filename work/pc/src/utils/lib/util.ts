@@ -8,4 +8,4 @@ export function getPageTitle(pageTitle: string):string {
 
 export default {
     getPageTitle
-}
+};

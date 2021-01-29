@@ -29,7 +29,8 @@ inquirer
             message: '请选择启动环境?',
             choices: [
                 'development',
-                'stage'
+                'stage',
+                'production'
             ]
         }
     ])
@@ -41,14 +42,14 @@ inquirer
         let command;
 
         if (project === 'pc') {
-            command = `cross-env NODE_ENV=${answers.compilerEnv} webpack-dev-server --progress --config build/webpack.${answers.compilerEnv === 'development' ? 'dev' : 'prod'}.js`;
+            command = `cross-env NODE_ENV=${answers.compilerEnv} webpack serve --config ./build/webpack.${ answers.compilerEnv === 'development' ? 'dev' : 'prod' }.config.js`;
         } else {
             command = 'egg-bin dev';
         }
 
 
         shell.echo('-e', '\n\033[32m ' + answers.compilerProject + '项目' + answers.compilerEnv + '环境' + ': 编译中... \033[0m');
-
+        console.log();
         // 开始编译
         const cwd = answers.compilerProject === 'pc' ? 
             path.resolve(__dirname, '../work/pc') : path.resolve(__dirname, '../work/service'); 

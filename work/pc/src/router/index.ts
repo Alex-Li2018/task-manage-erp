@@ -29,7 +29,12 @@ export const routes: Array<RouteRecordRaw> = [
                 group: 'main'
             }
         }]
-    }
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import(/* webpackChunkName: "Login" */ '../views/login/index.vue')
+    },
 ];
 
 const router = createRouter({

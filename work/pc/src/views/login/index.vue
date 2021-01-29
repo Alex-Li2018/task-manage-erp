@@ -3,13 +3,13 @@
   <div class="login-bg">
     <div class="login-content">
       <img
-        src="../../img/login/login.jpg"
+        src="../../static/login/login.jpg"
         alt=""
       >
       <div class="login-form">
         <section class="title">
           <img
-            src="../../img/login/icon.png"
+            src="../../static/login/icon.png"
             alt=""
           >
           <h4>管理系统登录</h4>
@@ -38,9 +38,6 @@
               auto-complete="off"
             />
           </el-form-item>
-          <!-- <el-form-item label="确认密码" prop="checkPass">
-                  <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
-              </el-form-item> -->
           <el-form-item>
             <el-button
               type="primary"
@@ -57,8 +54,6 @@
 </template>
 
 <script>
-import { loginAPI } from '@API/login';
-import { mutations, store } from '../../store/store';
 
 export default {
     data() {
@@ -116,7 +111,7 @@ export default {
 .login-bg {
   width: 100vw;
   height: 100vh;
-  background: url('../../img/login/bg.png') no-repeat center;
+  background: url('../../static/login/bg.png') no-repeat center;
   position: relative;
 }
 .login-content {

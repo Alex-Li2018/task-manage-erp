@@ -5,3 +5,5 @@ declare module '*.vue' {
 };
 
 declare module 'js-cookie';
+// 这里的axios声明为any类型
+declare module 'axios';

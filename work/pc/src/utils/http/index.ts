@@ -1,7 +1,6 @@
 import config from '@/config';
-import * as axios from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 export interface AjaxResponse {
   code: number;

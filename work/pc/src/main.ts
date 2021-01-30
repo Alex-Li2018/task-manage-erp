@@ -85,7 +85,7 @@ import {
     ElMessage,
     ElMessageBox,
     ElNotification,
-} from 'element-plus'; 
+} from 'element-plus';
 import App from './App.vue';
 
 const components = [
@@ -171,7 +171,7 @@ const components = [
 
 const app = createApp(App);
 components.forEach(component => {
-    app.component(component.name, component)
+    app.component(component.name, component);
 });
 
 app

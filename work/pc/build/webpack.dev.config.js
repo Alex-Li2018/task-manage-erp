@@ -14,15 +14,15 @@ module.exports = merge(
         // 4) 不会产生文件,集成在打包后的文件中 不会产生列
         devtool: 'eval-source-map', // 首次构建比较慢，二次构建比较快，源码映射source
         // 实时打包
-        watch: true,
+        // watch: true,
         watchOptions: { // 监控属性
             poll: 1000, // 每秒 问我 1000次
-            aggregateTimeout: 500, // 防抖 我一直输入代码
+            // aggregateTimeout: 500, // 防抖 我一直输入代码
             ignored: /node-modules/ // 不需要监控那个文件
         },
         // 必须安装webpack-dev-serve
         devServer: { // 开发服务的配置
-            port: 8080, // 端口
+            port: 8585, // 端口
             progress: true, // 进度条
             // contentBase: '../client', //找到对应的文件夹开启服务
             compress: true, // 启动压缩

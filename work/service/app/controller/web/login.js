@@ -8,7 +8,7 @@ class LoginController extends Controller {
     const { phone, password } = ctx.request.body;
     // 参数验证
     ctx.validate({
-      phone: { type: 'string', required: true, desc: '用户名' },
+      phone: { type: 'string', required: true, desc: '手机号' },
       password: { type: 'string', required: true, desc: '密码' },
     });
     if (ctx.paramErrors) {
@@ -33,7 +33,7 @@ class LoginController extends Controller {
       this.success({
         ...user,
         token,
-      }, '注册成功');
+      }, '登录成功');
     } catch (err) {
       this.error(err, '登录失败');
     }

@@ -25,7 +25,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.vue', '.jsx', '.js', '.json'],
         alias: {
-            '@': path.join(home, 'src'),
+            '@': path.join(__dirname, '../src'),
             vue: '@vue/runtime-dom',
         },
         modules: [

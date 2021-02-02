@@ -75,9 +75,9 @@ const cache = {
             return true;
         }
         if (Object.prototype.toString.call(data) !== '[object Object]') {
-            if (!data || !(data as object).__data) return true;
+            if (!data || !data.__data) return true;
 
-            return nowTime > (<object>data).__timeout;
+            return nowTime > data.__timeout;
         } else {
             return false;
         }

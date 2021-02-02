@@ -23,17 +23,17 @@
           class="demo-ruleForm"
         >
           <el-form-item
-            label="用户名"
-            prop="username"
+            label="电话号码"
+            prop="phone"
           >
-            <el-input v-model.number="ruleForm.username" />
+            <el-input v-model.number="ruleForm.phone" />
           </el-form-item>
           <el-form-item
             label="密码"
-            prop="pass"
+            prop="password"
           >
             <el-input
-              v-model="ruleForm.pass"
+              v-model="ruleForm.password"
               type="password"
               auto-complete="off"
             />
@@ -53,55 +53,45 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { mapActions } from 'vuex';
 
 export default {
     data() {
-      return {
-        ruleForm: {
-          pass: '',
-          username: ''
-        },
-        rules: {
-          pass: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-          username: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
-        }
-      };
+        return {
+            ruleForm: {
+                password: '',
+                phone: ''
+            },
+            rules: {
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+                phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }]
+            }
+        };
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            const { pass, username } = this.ruleForm;
-            const params = {
-              username,
-              password: pass
-            };
-            loginAPI(params).then(res => {
-              const { code, data } = res;
-              if (code == 200) {
-                mutations.setName(data.username);
-                // 同时将数据存入sessionStorage中
-                sessionStorage.setItem('isLogin', true);
-                // 判断是否带有重定向路径
-                if (this.$route.query.redirect) {
-                  this.$router.push({ path: decodeURI(this.$route.query.redirect) });
+        ...mapActions({
+            loginHandler: 'user/login'
+        }),
+        submitForm(formName) {
+            this.$refs[formName].validate(async (valid) => {
+                if (valid) {
+                    try {
+                        await this.loginHandler(this.ruleForm);
+                        // 页面跳转到首页
+                        this.$router.replace({ path: '/home' });
+                    } catch {
+                        this.$message.error('登录失败,请检查手机号或密码');
+                    }
+
                 } else {
-                  this.$router.push({ path: '/admin/free-check' });
+                    return false;
                 }
-              } else {
-                sessionStorage.setItem('isLogin', false);
-              }
             });
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        }
     }
 };
 </script>
@@ -109,62 +99,62 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/mixin.scss";
 .login-bg {
-  width: 100vw;
-  height: 100vh;
-  background: url('../../static/login/bg.png') no-repeat center;
-  position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url('../../static/login/bg.png') no-repeat center;
+    position: relative;
 }
 .login-content {
-  display: flex;
-  height: 450px;
-  @include center;
-  padding: 20px;
-  box-sizing: content-box;
-  border-radius: 10px;
-  background-color: #fff;
-  img {
+    display: flex;
     height: 450px;
-  }
+    @include center;
+    padding: 20px;
+    box-sizing: content-box;
+    border-radius: 10px;
+    background-color: #fff;
+    img {
+        height: 450px;
+    }
 }
 .login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .title {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 30px;
-    img {
-      height: 40px;
-      width: 40px;
-      margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .title {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+        img {
+            height: 40px;
+            width: 40px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            font-weight: 600;
+            font-size: 26px;
+        }
     }
-    h4 {
-      font-weight: 600;
-      font-size: 26px;
+    button {
+        background-color: #4067f4 !important;
     }
-  }
-  button {
-    background-color: #4067f4 !important;
-  }
-  ::v-deep .el-form-item__content {
-      width: 300px;
-  }
-  ::v-deep .el-form-item__label {
-      // color: #fff;
-      font-weight: 600;
-  }
-  ::v-deep .el-form-item__content {
-      text-align: center;
+    ::v-deep .el-form-item__content {
+        width: 300px;
+    }
+    ::v-deep .el-form-item__label {
+        // color: #fff;
+        font-weight: 600;
+    }
+    ::v-deep .el-form-item__content {
+        text-align: center;
+        span {
+            // color: #fff;
+        }
+    }
+    ::v-deep .el-button {
       span {
-          // color: #fff;
+          font-weight: 600 !important;
       }
-  }
-  ::v-deep .el-button {
-    span {
-      font-weight: 600 !important;
     }
-  }
 }
 </style>

@@ -34,7 +34,7 @@ module.exports = {
                     ['@components', './src/components'],
                     ['@mixin', './src/mixins'],
                 ],
-                extensions: ['.vue', '.js', 'ts', '.json'],
+                extensions: ['.vue', '.js', 'ts', 'tsx', '.json'],
             },
         },
     },

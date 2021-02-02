@@ -20,11 +20,11 @@ export function forEach(obj: any, fn) {
     }
 
     if (isArray(obj)) {
-        for (var i = 0, l = obj.length; i < l; i++) {
+        for (let i = 0, l = obj.length; i < l; i++) {
             fn.call(null, obj[i], i, obj);
         }
     } else {
-        for (var key in obj) {
+        for (const key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
                 fn.call(null, obj[key], key, obj);
             }
@@ -33,7 +33,7 @@ export function forEach(obj: any, fn) {
 }
 
 export function extend(a : any, b: any, thisArg: any) {
-    forEach(b, function assignValue(val: any, key: any) {
+    forEach(b, (val: any, key: any) => {
         if (thisArg && typeof val === 'function') {
             a[key] = val.bind(thisArg);
         } else {

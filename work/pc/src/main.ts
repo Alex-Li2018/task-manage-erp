@@ -87,6 +87,7 @@ import {
     ElNotification,
 } from 'element-plus';
 import App from './App.vue';
+import './permission';
 
 const components = [
     ElAlert,
@@ -168,10 +169,20 @@ const components = [
     ElTree,
     ElUpload,
 ];
+const plugins = [
+    ElInfiniteScroll,
+    ElLoading,
+    ElMessage,
+    ElMessageBox,
+    ElNotification,
+];
 
 const app = createApp(App);
 components.forEach(component => {
     app.component(component.name, component);
+});
+plugins.forEach(plugin => {
+    app.use(plugin)
 });
 
 app

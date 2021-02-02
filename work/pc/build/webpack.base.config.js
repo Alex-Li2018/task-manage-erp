@@ -94,7 +94,7 @@ module.exports = {
         }),
         new CaseSensitivePathsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'vu3-webpack5-typescript',
+            title: '柯明教育',
             template: path.join(home, './public/index.html'),
             chunks: ['main'],
             inlineSource: 'runtime~.+\\.js'

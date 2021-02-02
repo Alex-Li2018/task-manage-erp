@@ -14,7 +14,7 @@ export const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/home',
-        name: 'main',
+        name: 'Main',
         component: Layout,
         redirect: '/home/index/',
         meta: {
@@ -22,7 +22,7 @@ export const routes: Array<RouteRecordRaw> = [
         },
         children: [{
             path: 'index',
-            name: 'taskManage',
+            name: 'TaskManage',
             component: () => import(/* webpackChunkName: "TaskManage" */ '../views/Home.vue'),
             meta: {
                 title: '任务管理',

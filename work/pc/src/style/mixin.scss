@@ -73,3 +73,20 @@ $fc:#fff;
 	$rem: 100px;
 	@return ($px / $rem) + rem;
 }
+
+// flex
+@mixin flexBox($justify: center, $align: center, $v: row) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $v;
+}
+
+// 超出隐藏
+@mixin textOverflow($line: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+}

@@ -1,6 +1,7 @@
 import config from '@/config';
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import axios from 'axios';
+import { getToken } from '@/utils/lib/auth';
+import { ElMessage } from 'element-plus';
 
 export interface AjaxResponse {
   code: number;
@@ -18,13 +19,11 @@ const request = axios.default.create({
     maxContentLength: 4000
 });
 
-// 拦截器
-request.interceptors.request.use((config: AxiosRequestConfig) => {
-    if (localStorage.getItem('token')) {
-        config.headers.token = localStorage.getItem('token'); // 让请求头携带验证token
-        config.headers.admin = localStorage.getItem('user'); // 让每个请求携带自定义token 请根据实际情况自行修改
-    }
-
+// 请求拦截器
+request.interceptors.request.use((config: any) => {
+    // 加上token
+    const token = getToken();
+    config.headers.authorization = `Bearer ${token}`;
     return config;
 }, (err: any) => {
     ElMessage({
@@ -35,7 +34,8 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
     Promise.reject(err);
 });
 
-request.interceptors.response.use((response: AxiosResponse) => {
+// 响应拦截器
+request.interceptors.response.use((response: any) => {
     console.log(response);
     if (response.status !== 200) {
         ElMessage({

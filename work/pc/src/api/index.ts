@@ -1,5 +1,7 @@
-import user from './user';
+import user from './modules/user';
+import task from './modules/task';
 
 export default {
-    user
+    user,
+    task
 };

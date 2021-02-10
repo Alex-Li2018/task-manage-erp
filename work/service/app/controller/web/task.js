@@ -33,12 +33,12 @@ class TaskController extends Controller {
   async lists() {
     const { ctx, app } = this;
     const { Op } = app.Sequelize;
-    const { page, page_size, name } = ctx.query;
+    const { page, page_size, keyword } = ctx.query;
 
     // 格式化查询条件
     const where = {};
-    name && (where.name = {
-      [Op.like]: `%${name}%`,
+    keyword && (where.name = {
+      [Op.like]: `%${keyword}%`,
     });
 
     try {

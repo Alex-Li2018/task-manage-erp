@@ -1,23 +1,39 @@
 <template>
   <section class="task-manage_wrap">
     <BaseHeader header-name="任务管理" />
-    <div class="mar-top-20 tool-btn_wrap mar-bottom-20">
-      <el-input
-        v-model="pagination.keyword"
-        placeholder="请输入任务名称或id"
-      >
-        <template #append>
-          <el-button
-            type="primary"
-            @click="handlerSearch"
+    <el-row
+      type="flex"
+      class="mar-top-20 mar-bottom-20"
+      justify="space-between"
+    >
+      <el-col :span="12">
+        <div class="tool-btn_wrap">
+          <el-input
+            v-model="pagination.keyword"
+            placeholder="请输入任务名称或id"
           >
-            搜索
-          </el-button>
-        </template>
-      </el-input>
-    </div>
+            <template #append>
+              <el-button
+                type="primary"
+                @click="handlerSearch"
+              >
+                搜索
+              </el-button>
+            </template>
+          </el-input>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <el-button
+          type="primary"
+          @click="createTaskHandler"
+        >
+          创建任务
+        </el-button>
+      </el-col>
+    </el-row>
     <el-table
-      :data="tableData"
+      :data="tableData.lists"
       border
       style="width: 100%"
     >
@@ -39,11 +55,7 @@
       <el-table-column
         prop="order_prize"
         label="订单价"
-      >
-        <template #default="scope">
-          {{ scope.row.order_prize }}
-        </template>
-      </el-table-column>
+      />
       <el-table-column
         prop="rebate_prize"
         label="返利"
@@ -124,6 +136,7 @@
 <script lang="ts">
 import api from '@/api';
 import BaseHeader from '@/views/components/BaseHeader';
+import { useRouter } from 'vue-router';
 import {
  defineComponent, reactive, onMounted
 } from 'vue';
@@ -144,14 +157,14 @@ function getTableData() {
         total: null
     };
 
-    const tableData = reactive([]);
+    const tableData = reactive({
+        lists: []
+    });
     const pagination = reactive(paginationData);
     // 请求数据
     const loadData = async () => {
         const { data } = await api.task.taskList(pagination);
-        data.lists.forEach(e => {
-            tableData.push(e);
-        });
+        tableData.lists = data.lists;
         pagination.total = data.total;
         // 分页数据
         pagination.page = data.page;
@@ -160,14 +173,17 @@ function getTableData() {
 
     // 搜索
     const handlerSearch = () => {
+        tableData.lists = [];
         loadData();
     };
 
     // 分页
     const handleSizeChange = () => {
+        tableData.lists = [];
         loadData();
     };
     const handleCurrentChange = () => {
+        tableData.lists = [];
         loadData();
     };
 
@@ -181,6 +197,17 @@ function getTableData() {
         handleSizeChange,
         handleCurrentChange
     };
+}
+
+// 创建任务跳转
+function routerHandler() {
+    const router = useRouter();
+    const createTaskHandler = () => {
+        router.push({
+            path: '/home/task-create'
+        });
+    };
+    return createTaskHandler;
 }
 
 export default defineComponent({
@@ -197,13 +224,16 @@ export default defineComponent({
             handleCurrentChange
         } = getTableData();
 
+        const createTaskHandler = routerHandler();
+
         return {
             tableData,
             pagination,
             loadData,
             handlerSearch,
             handleSizeChange,
-            handleCurrentChange
+            handleCurrentChange,
+            createTaskHandler
         };
     }
 });

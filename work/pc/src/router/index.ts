@@ -28,8 +28,34 @@ export const routes: Array<RouteRecordRaw> = [
                 title: '任务管理',
                 group: 'main'
             }
+        },{
+            path: 'task-create',
+            name: 'TaskCreate',
+            component: () => import(/* webpackChunkName: "TaskCreate" */ '../views/tasks/create.vue'),
+            meta: {
+                title: '创建任务',
+                group: 'main'
+            }
         }]
     },
+    // {
+    //     path: '/task',
+    //     name: 'Main',
+    //     component: Layout,
+    //     redirect: '/task/create/',
+    //     meta: {
+    //         title: '创建任务',
+    //     },
+    //     children: [{
+    //         path: 'create',
+    //         name: 'TaskCreate',
+    //         component: () => import(/* webpackChunkName: "TaskCreate" */ '../views/tasks/create.vue'),
+    //         meta: {
+    //             title: '创建任务',
+    //             group: 'main'
+    //         }
+    //     }]
+    // },
     {
         path: '/login',
         name: 'Login',

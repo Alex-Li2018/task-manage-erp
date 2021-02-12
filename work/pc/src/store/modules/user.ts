@@ -2,7 +2,6 @@ import api from '@/api';
 import cache from '@/utils/lib/cache';
 import { setToken } from '@/utils/lib/auth';
 
-console.log(cache);
 export default {
     namespaced: true,
     state: {

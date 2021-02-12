@@ -59,7 +59,6 @@
       <el-table-column
         prop="rebate_prize"
         label="返利"
-        width="300"
       />
       <el-table-column
         prop="actual_prize"
@@ -106,13 +105,15 @@
           <el-button
             type="text"
             size="small"
-            @click="handleClick(scope.row)"
+            class="el-button--danger-important"
+            @click="handleDelete(scope.row)"
           >
-            查看
+            删除
           </el-button>
           <el-button
             type="text"
             size="small"
+            @click="handleEdit(scope.row)"
           >
             编辑
           </el-button>
@@ -137,6 +138,7 @@
 import api from '@/api';
 import BaseHeader from '@/views/components/BaseHeader';
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus';
 import {
  defineComponent, reactive, onMounted
 } from 'vue';
@@ -164,7 +166,15 @@ function getTableData() {
     // 请求数据
     const loadData = async () => {
         const { data } = await api.task.taskList(pagination);
-        tableData.lists = data.lists;
+        tableData.lists = data.lists.map(item => {
+            item.platform = {
+                1: '淘宝',
+                2: '天猫',
+                3: '京东',
+                4: '拼多多'
+            }[item.platform];
+            return item;
+        });
         pagination.total = data.total;
         // 分页数据
         pagination.page = data.page;
@@ -186,6 +196,14 @@ function getTableData() {
         tableData.lists = [];
         loadData();
     };
+    // 操作
+    const handleDelete = async ({ id }) => {
+        await api.task.delTask(id);
+        ElMessage.success({
+            message: '删除成功',
+            type: 'success'
+        });
+    };
 
     onMounted(loadData);
 
@@ -195,19 +213,34 @@ function getTableData() {
         loadData,
         handlerSearch,
         handleSizeChange,
-        handleCurrentChange
+        handleCurrentChange,
+        handleDelete
     };
 }
 
-// 创建任务跳转
+// 路由处理
 function routerHandler() {
     const router = useRouter();
-    const createTaskHandler = () => {
+    // 创建任务跳转
+    function createTaskHandler(): void {
         router.push({
             path: '/home/task-create'
         });
+    }
+    // 编辑页面
+    function handleEdit({ id }): void {
+        router.push({
+            path: '/home/task-create',
+            query: {
+                id
+            }
+        });
+    }
+
+    return {
+        createTaskHandler,
+        handleEdit
     };
-    return createTaskHandler;
 }
 
 export default defineComponent({
@@ -215,16 +248,21 @@ export default defineComponent({
         BaseHeader
     },
     setup() {
+
         const {
             tableData,
             pagination,
             loadData,
             handlerSearch,
             handleSizeChange,
-            handleCurrentChange
+            handleCurrentChange,
+            handleDelete
         } = getTableData();
 
-        const createTaskHandler = routerHandler();
+        const {
+            createTaskHandler,
+            handleEdit
+        } = routerHandler();
 
         return {
             tableData,
@@ -233,7 +271,9 @@ export default defineComponent({
             handlerSearch,
             handleSizeChange,
             handleCurrentChange,
-            createTaskHandler
+            createTaskHandler,
+            handleDelete,
+            handleEdit
         };
     }
 });
@@ -244,5 +284,11 @@ export default defineComponent({
     .tool-btn_wrap {
         width: 300px;
     }
+    .el-button--danger-important {
+        color: #FFF;
+        background-color: #F56C6C;
+        border-color: #F56C6C;
+    }
 }
+
 </style>

@@ -1,11 +1,11 @@
 <template>
   <section class="task-create_wrap">
-    <BaseHeader header-name="创建任务" />
+    <BaseHeader :header-name="headerName" />
     <el-form
       ref="ruleForm"
       :model="ruleForm"
       :rules="rules"
-      label-width="100px"
+      label-width="150px"
       class="demo-ruleForm"
     >
       <el-form-item
@@ -23,8 +23,10 @@
           placeholder="请选择活动平台"
         >
           <el-option
-            label="区域一"
-            value="shanghai"
+            v-for="(label, value) in platObj"
+            :key="value"
+            :label="label"
+            :value="value"
           />
         </el-select>
       </el-form-item>
@@ -59,7 +61,7 @@
         <el-input v-model="ruleForm.detail" />
       </el-form-item>
       <el-form-item
-        label="活动时间"
+        label="活动开始时间"
         required
       >
         <el-col :span="11">
@@ -72,17 +74,17 @@
             />
           </el-form-item>
         </el-col>
-        <el-col
-          class="line"
-          :span="2"
-        >
-          -
-        </el-col>
+      </el-form-item>
+      <el-form-item
+        label="活动结束时间"
+        required
+      >
         <el-col :span="11">
           <el-form-item prop="end_at">
-            <el-time-picker
+            <el-date-picker
               v-model="ruleForm.end_at"
-              placeholder="选择结束时间"
+              type="date"
+              placeholder="选择开始时间"
               style="width: 100%;"
             />
           </el-form-item>
@@ -93,7 +95,7 @@
           type="primary"
           @click="submitForm('ruleForm')"
         >
-          立即创建
+          {{ $route.query.id ? '编辑任务' : '创建任务' }}
         </el-button>
         <el-button @click="resetForm('ruleForm')">
           重置
@@ -106,9 +108,6 @@
 <script>
 import api from '@/api';
 import BaseHeader from '@/views/components/BaseHeader';
-import {
- defineComponent, reactive, onMounted
-} from 'vue';
 
 export default {
     components: {
@@ -116,6 +115,13 @@ export default {
     },
     data() {
         return {
+            headerName: '创建任务',
+            platObj: {
+                1: '淘宝',
+                2: '天猫',
+                3: '京东',
+                4: '拼多多'
+            },
             ruleForm: {
                 name: '',
                 platform: '',
@@ -162,15 +168,32 @@ export default {
             }
         };
     },
+    created() {
+        this.headerName = this.$route.query.id ? '编辑任务' : '创建任务';
+        this.$route.query.id && this.loadData();
+    },
     methods: {
+        async loadData() {
+            const res = await api.task.taskDetail(this.$route.query.id);
+            this.ruleForm = res.data;
+            this.ruleForm.platform = String(this.ruleForm.platform);
+        },
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-            if (valid) {
-                alert('submit!');
-            } else {
-                console.log('error submit!!');
-                return false;
-            }
+            this.$refs[formName].validate(async (valid) => {
+                if (valid) {
+                    !this.$route.query.id && await api.task.createTask(this.ruleForm);
+                    this.$route.query.id && await api.task.updateTask(this.$route.query.id, this.ruleForm);
+                    this.$message({
+                        showClose: true,
+                        message: this.$route.query.id ? '编辑任务成功' : '创建任务成功',
+                        type: 'success'
+                    });
+                    this.$router.push({
+                        path: '/home/index'
+                    });
+                } else {
+                    return false;
+                }
             });
         },
         resetForm(formName) {

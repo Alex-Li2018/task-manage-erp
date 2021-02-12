@@ -36,7 +36,6 @@ request.interceptors.request.use((config: any) => {
 
 // 响应拦截器
 request.interceptors.response.use((response: any) => {
-    console.log(response);
     if (response.status !== 200) {
         ElMessage({
             message: `请求错误，${String(response.status)}`,

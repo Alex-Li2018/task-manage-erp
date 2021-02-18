@@ -6,9 +6,9 @@ class UserController extends Controller {
   async register() {
     const { ctx, app } = this;
     const { user_name: userName, phone, password } = ctx.request.body;
-
+    console.log(ctx.model, userName, phone, password);
     try {
-      const { dataValues } = await ctx.model.WebUser.create({ user_name: userName, phone, password });
+      const { dataValues } = await ctx.model.AppUser.create({ user_name: userName, phone, password });
 
       // 验证token，请求时在header配置 Authorization=`Bearer ${token}`
       const token = app.jwt.sign({
@@ -24,6 +24,7 @@ class UserController extends Controller {
         token,
       }, '注册成功');
     } catch (err) {
+      console.log(err);
       if (err.original.code === 'ER_DUP_ENTRY') {
         this.error({}, '手机号重复');
       } else {

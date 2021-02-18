@@ -5,7 +5,7 @@ module.exports = options => {
   return async function jwt(ctx, next) {
     // 先判断是否需要鉴权
     const { exclude } = options;
-    const requestUrl = ctx.request.url.replace('/web/v1/', '');
+    const requestUrl = ctx.request.url;
 
     if (!exclude.includes(requestUrl)) {
       let token = ctx.request.header.authorization;

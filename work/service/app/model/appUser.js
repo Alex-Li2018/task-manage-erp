@@ -33,7 +33,7 @@ module.exports = app => {
     // 使用自定义表名
     freezeTableName: true,
     // 实例对应的表名
-    tableName: 'users',
+    tableName: 'appusers',
     // 如果需要sequelize帮你维护createdAt,updatedAt和deletedAt必须先启用timestamps功能
     // 将createdAt对应到数据库的created_at字段
     createdAt: 'created_at',

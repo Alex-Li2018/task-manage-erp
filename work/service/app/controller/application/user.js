@@ -6,7 +6,7 @@ class UserController extends Controller {
   async register() {
     const { ctx, app } = this;
     const { user_name: userName, phone, password } = ctx.request.body;
-    console.log(ctx.model, userName, phone, password);
+
     try {
       const { dataValues } = await ctx.model.AppUser.create({ user_name: userName, phone, password });
 
@@ -46,7 +46,7 @@ class UserController extends Controller {
     });
 
     try {
-      const res = await ctx.model.WebUser.findAndCountAll({
+      const res = await ctx.model.AppUser.findAndCountAll({
         order: [[ 'uid', 'DESC' ]],
         where,
         offset: (page - 1) * page_size,

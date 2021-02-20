@@ -8,4 +8,5 @@ module.exports = app => {
   const { application } = controller;
   // 用户注册
   apiV1Router.post('/user/register', application.user.register);
+  apiV1Router.get('/user', application.user.lists);
 };

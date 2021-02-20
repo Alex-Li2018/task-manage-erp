@@ -25,9 +25,9 @@ module.exports = appInfo => {
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'task-manage-erp-web',
+    database: 'task-manage',
     host: '127.0.0.1',
-    t: '3306',
+    port: '3306',
     username: 'root',
     password: '',
     timezone: '+08:00', // 东八时区

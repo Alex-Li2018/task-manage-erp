@@ -66,6 +66,39 @@ class UserController extends Controller {
       this.error(err, '查询失败');
     }
   }
+
+  /* 用户更新信息 */
+  async update() {
+    const { ctx } = this;
+    const {
+      user_name,
+      age,
+      sex,
+      signature,
+      avatar,
+    } = ctx.request.body;
+    const id = ctx.params.id;
+
+    try {
+      const data = await ctx.model.AppUser.findByPk(Number(id));
+      console.log(data);
+      const { dataValues } = data;
+      const obj = {
+        user_name: user_name || dataValues.user_name,
+        age: age || dataValues.age,
+        sex: sex || dataValues.sex,
+        signature: signature || dataValues.signature,
+        avatar: avatar || dataValues.avatar,
+      };
+      const { dataValues: user } = await data.update(obj);
+
+      this.success({
+        ...user,
+      }, '更新成功');
+    } catch (err) {
+      this.error(err, '更新失败');
+    }
+  }
 }
 
 module.exports = UserController;
